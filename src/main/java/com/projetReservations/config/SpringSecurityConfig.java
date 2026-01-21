@@ -30,6 +30,7 @@ public class SpringSecurityConfig {
                         .requestMatchers(org.springframework.http.HttpMethod.DELETE, "/artists/**").hasRole("ADMIN")
 
                         // Tout le reste nécessite login
+                        .requestMatchers("/users/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
 
