@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <div th:fragment="header">
     <nav>
-        <a href="/" >Home</a> |
-        <a href="/artists">Artists</a>
-        | <a href="/artists/create">Add Artist</a>
-
+        <a href="/">Home</a> |
+        <a href="/artists">Artists</a> |
+        <a href="/artists/create">Add Artist</a> |
+        <span sec:authorize="isAnonymous()">
+      <a href="/login">Login</a>
+    </span>
+        <span sec:authorize="isAuthenticated()">
+      <span> | Logged in as <b sec:authentication="name">user</b></span>
+      <form th:action="@{/logout}" method="post" style="display:inline;">
+        <button type="submit">Logout</button>
+      </form>
+    </span>
     </nav>
     <hr/>
 </div>
