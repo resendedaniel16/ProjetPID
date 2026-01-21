@@ -9,6 +9,10 @@
         <span sec:authorize="hasRole('ADMIN')">
   | <a href="/artists/create">Add Artist</a>
 </span>
+        <span sec:authorize="hasRole('ADMIN')">
+  | <a href="/users">Users</a>
+</span>
+
 
         <span sec:authorize="isAnonymous()">
       <a href="/login">Login</a>
