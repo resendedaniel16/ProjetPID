@@ -21,11 +21,18 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Public
                         .requestMatchers("/", "/login", "/css/**", "/js/**", "/images/**").permitAll()
-                        // Le CRUD Artist : accessible sans login (tu peux resserrer plus tard)
-                        .requestMatchers("/artists/**").permitAll()
-                        // Tout le reste nécessite une authentification
+
+                        // READ Artists : accessible à tous
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/artists/**").permitAll()
+
+                        // WRITE Artists : réservé ADMIN
+                        .requestMatchers(org.springframework.http.HttpMethod.POST, "/artists/**").hasRole("ADMIN")
+                        .requestMatchers(org.springframework.http.HttpMethod.DELETE, "/artists/**").hasRole("ADMIN")
+
+                        // Tout le reste nécessite login
                         .anyRequest().authenticated()
                 )
+
                 // Form login custom
                 .formLogin(form -> form
                         .loginPage("/login")
