@@ -1,0 +1,2 @@
+-- Initial Flyway migration
+-- Database schema will be added in next migrations

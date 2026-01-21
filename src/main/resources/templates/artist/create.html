@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/main :: body}">
+<body>
+<h1>Create Artist</h1>
+
+<form th:action="@{/artists}" th:object="${artist}" method="post">
+
+    <div>
+        <label for="firstname">Firstname</label>
+        <input id="firstname" type="text" th:field="*{firstname}"/>
+        <div th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></div>
+    </div>
+
+    <div>
+        <label for="lastname">Lastname</label>
+        <input id="lastname" type="text" th:field="*{lastname}"/>
+        <div th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></div>
+    </div>
+
+    <button type="submit">Create</button>
+</form>
+
+<p><a href="/artists">Back to list</a></p>
+</body>
+</html>

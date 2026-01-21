@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/main :: body}">
+<body>
+<h1 th:text="${artist.firstname + ' ' + artist.lastname}">Artist</h1>
+
+<p><strong>ID:</strong> <span th:text="${artist.id}">1</span></p>
+
+<p>
+    <a href="/artists">← Back to list</a>
+</p>
+<p>
+    <a th:href="@{/artists/{id}/edit(id=${artist.id})}">Edit</a> |
+    <a href="/artists">Back to list</a>
+</p>
+<form th:action="@{/artists/{id}(id=${artist.id})}" method="post" style="display:inline;">
+    <input type="hidden" name="_method" value="delete"/>
+    <button type="submit"
+            onclick="return confirm('Are you sure you want to delete this artist?');">
+        Delete
+    </button>
+</form>
+
+
+</body>
+</html>
