@@ -7,6 +7,17 @@
 </head>
 <body>
 <header th:replace="~{fragments/header :: header}"></header>
+<section>
+    <div th:if="${successMessage}" th:text="${successMessage}"></div>
+    <div th:if="${errorMessage}" th:text="${errorMessage}"></div>
+</section>
+<style>
+  .success { color: green; }
+  .error { color: red; }
+</style>
+<div th:if="${successMessage}" class="success" th:text="${successMessage}"></div>
+<div th:if="${errorMessage}" class="error" th:text="${errorMessage}"></div>
+
 
 <main>
     <div th:replace="~{::body}"></div>
