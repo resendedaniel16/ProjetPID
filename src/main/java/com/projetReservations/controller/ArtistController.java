@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.projetReservations.model.Artist;
+import org.springframework.web.bind.annotation.DeleteMapping;
+
 
 
 
@@ -90,6 +92,12 @@ public class ArtistController {
         Artist saved = artistService.save(artist);
         return "redirect:/artists/" + saved.getId();
     }
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id) {
+        artistService.deleteById(id);
+        return "redirect:/artists";
+    }
+
 
 
 }
