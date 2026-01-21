@@ -11,6 +11,8 @@ import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.projetReservations.model.Artist;
+
 
 
 @Controller
@@ -71,5 +73,23 @@ public class ArtistController {
 
         return "redirect:/artists/" + id;
     }
+    @GetMapping("/create")
+    public String create(Model model) {
+        model.addAttribute("artist", new Artist("", ""));
+        return "artist/create";
+    }
+
+    @PostMapping
+    public String store(@Valid @ModelAttribute("artist") Artist artist,
+                        BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "artist/create";
+        }
+
+        Artist saved = artistService.save(artist);
+        return "redirect:/artists/" + saved.getId();
+    }
+
 
 }
