@@ -6,6 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.projetReservations.model.Artist;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 @Controller
 @RequestMapping("/artists")
@@ -32,4 +38,38 @@ public class ArtistController {
         model.addAttribute("artist", artistOpt.get());
         return "artist/show";
     }
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable Long id, Model model) {
+        var artistOpt = artistService.findById(id);
+        if (artistOpt.isEmpty()) {
+            return "redirect:/artists";
+        }
+        model.addAttribute("artist", artistOpt.get());
+        return "artist/edit";
+    }
+
+    @PostMapping("/{id}")
+    public String update(@PathVariable Long id,
+                         @Valid @ModelAttribute("artist") Artist formArtist,
+                         BindingResult bindingResult,
+                         Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("artist", formArtist);
+            return "artist/edit";
+        }
+
+        var artistOpt = artistService.findById(id);
+        if (artistOpt.isEmpty()) {
+            return "redirect:/artists";
+        }
+
+        Artist artist = artistOpt.get();
+        artist.setFirstname(formArtist.getFirstname());
+        artist.setLastname(formArtist.getLastname());
+        artistService.save(artist);
+
+        return "redirect:/artists/" + id;
+    }
+
 }

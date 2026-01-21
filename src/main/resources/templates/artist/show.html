@@ -9,5 +9,10 @@
 <p>
     <a href="/artists">← Back to list</a>
 </p>
+<p>
+    <a th:href="@{/artists/{id}/edit(id=${artist.id})}">Edit</a> |
+    <a href="/artists">Back to list</a>
+</p>
+
 </body>
 </html>
