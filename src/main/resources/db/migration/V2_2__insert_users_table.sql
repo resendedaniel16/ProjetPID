@@ -1,0 +1,21 @@
+INSERT INTO users (login, password, firstname, lastname, email, langue, role, created_at) VALUES
+(
+    'admin',
+    '$2a$10$7uZxv6d6kE8QvH1N8qv2QeE3tQ2vK5JZqZk2R9nH6zM7V9EwH9E2u',
+    'Admin',
+    'User',
+    'admin@reservations.be',
+    'fr',
+    'ADMIN',
+    NOW()
+),
+(
+    'member',
+    '$2a$10$7uZxv6d6kE8QvH1N8qv2QeE3tQ2vK5JZqZk2R9nH6zM7V9EwH9E2u',
+    'Regular',
+    'Member',
+    'member@reservations.be',
+    'fr',
+    'MEMBER',
+    NOW()
+);
