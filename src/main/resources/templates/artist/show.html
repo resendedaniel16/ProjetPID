@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/main :: body}">
+<body>
+<h1 th:text="${artist.firstname + ' ' + artist.lastname}">Artist</h1>
+
+<p><strong>ID:</strong> <span th:text="${artist.id}">1</span></p>
+
+<p>
+    <a href="/artists">← Back to list</a>
+</p>
+</body>
+</html>

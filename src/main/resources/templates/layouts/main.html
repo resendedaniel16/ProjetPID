@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:text="${title} ?: 'ProjetReservations'">ProjetReservations</title>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main>
+    <div th:replace="~{::body}"></div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

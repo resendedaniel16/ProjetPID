@@ -1,0 +1,35 @@
+package com.projetReservations.controller;
+
+import com.projetReservations.service.ArtistService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/artists")
+public class ArtistController {
+
+    private final ArtistService artistService;
+
+    public ArtistController(ArtistService artistService) {
+        this.artistService = artistService;
+    }
+
+    @GetMapping
+    public String index(Model model) {
+        model.addAttribute("artists", artistService.findAll());
+        return "artist/index";
+    }
+
+    @GetMapping("/{id}")
+    public String show(@PathVariable Long id, Model model) {
+        var artistOpt = artistService.findById(id);
+        if (artistOpt.isEmpty()) {
+            return "redirect:/artists";
+        }
+        model.addAttribute("artist", artistOpt.get());
+        return "artist/show";
+    }
+}
