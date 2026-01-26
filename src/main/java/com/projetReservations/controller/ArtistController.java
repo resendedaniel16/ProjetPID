@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-
-
 @Controller
 @RequestMapping("/artists")
 public class ArtistController {
@@ -43,6 +41,7 @@ public class ArtistController {
         model.addAttribute("artist", artistOpt.get());
         return "artist/show";
     }
+
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable Long id, Model model) {
         var artistOpt = artistService.findById(id);
@@ -54,11 +53,7 @@ public class ArtistController {
     }
 
     @PostMapping("/{id}")
-    public String update(@PathVariable Long id,
-                         @Valid @ModelAttribute("artist") Artist formArtist,
-                         BindingResult bindingResult,
-                         Model model,
-                         RedirectAttributes redirAttrs) {
+    public String update(@PathVariable Long id, @Valid @ModelAttribute("artist") Artist formArtist, BindingResult bindingResult, Model model, RedirectAttributes redirAttrs) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("errorMessage", "Échec de la modification de l'artiste !");
@@ -87,10 +82,7 @@ public class ArtistController {
     }
 
     @PostMapping
-    public String store(@Valid @ModelAttribute("artist") Artist artist,
-                        BindingResult bindingResult,
-                        Model model,
-                        RedirectAttributes redirAttrs) {
+    public String store(@Valid @ModelAttribute("artist") Artist artist, BindingResult bindingResult, Model model, RedirectAttributes redirAttrs) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("errorMessage", "Échec de la création de l'artiste !");
@@ -104,8 +96,7 @@ public class ArtistController {
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable Long id,
-                         RedirectAttributes redirAttrs) {
+    public String delete(@PathVariable Long id, RedirectAttributes redirAttrs) {
 
         if (artistService.findById(id).isPresent()) {
             artistService.deleteById(id);
@@ -116,8 +107,6 @@ public class ArtistController {
 
         return "redirect:/artists";
     }
-
-
 
 
 }

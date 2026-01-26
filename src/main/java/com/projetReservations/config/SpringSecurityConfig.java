@@ -26,26 +26,15 @@ public class SpringSecurityConfig {
                         .requestMatchers(org.springframework.http.HttpMethod.GET, "/artists/**").permitAll()
 
                         // WRITE Artists : réservé ADMIN
-                        .requestMatchers(org.springframework.http.HttpMethod.POST, "/artists/**").hasRole("ADMIN")
-                        .requestMatchers(org.springframework.http.HttpMethod.DELETE, "/artists/**").hasRole("ADMIN")
+                        .requestMatchers(org.springframework.http.HttpMethod.POST, "/artists/**").hasRole("ADMIN").requestMatchers(org.springframework.http.HttpMethod.DELETE, "/artists/**").hasRole("ADMIN")
 
                         // Tout le reste nécessite login
-                        .requestMatchers("/users/**").hasRole("ADMIN")
-                        .anyRequest().authenticated()
-                )
+                        .requestMatchers("/users/**").hasRole("ADMIN").anyRequest().authenticated())
 
                 // Form login custom
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/", true)
-                        .permitAll()
-                )
+                .formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/", true).permitAll())
                 // Logout
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
-                        .permitAll()
-                )
+                .logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/").permitAll())
                 // CSRF activé par défaut (OK)
                 .httpBasic(Customizer.withDefaults());
 
