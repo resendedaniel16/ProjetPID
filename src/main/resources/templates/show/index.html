@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Shows</title>
+</head>
+<body>
+<h1 th:text="${title}">Shows</h1>
+
+<p th:if="${#lists.isEmpty(shows)}">Aucun show pour le moment.</p>
+
+<ul th:unless="${#lists.isEmpty(shows)}">
+    <li th:each="s : ${shows}">
+        <strong th:text="${s.title}">Titre</strong>
+        — <a th:href="@{/shows/{id}(id=${s.id})}">Voir la fiche</a>
+    </li>
+</ul>
+
+<p><a th:href="@{/}">Retour accueil</a></p>
+</body>
+</html>

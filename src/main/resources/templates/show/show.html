@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Show</title>
+</head>
+<body>
+
+<h1 th:text="${show.title}">Titre</h1>
+
+<p th:if="${show.description != null}" th:text="${show.description}">
+    Description
+</p>
+
+<p>
+    <small>
+        Créé le : <span th:text="${#temporals.format(show.createdAt, 'dd/MM/yyyy HH:mm')}">date</span>
+    </small>
+</p>
+
+<p><a th:href="@{/shows}">Retour au catalogue</a></p>
+
+</body>
+</html>
