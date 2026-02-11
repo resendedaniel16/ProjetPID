@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/shows")
@@ -49,7 +50,8 @@ public class ShowController {
     @PostMapping
     public String store(@Valid @ModelAttribute Show show,
                         BindingResult bindingResult,
-                        Model model) {
+                        Model model,
+                        RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("title", "Créer un show");
@@ -57,6 +59,7 @@ public class ShowController {
         }
 
         showRepository.save(show);
+        redirectAttributes.addFlashAttribute("success", "Show créé avec succès.");
         return "redirect:/shows";
     }
     @PostMapping("/{id}")
@@ -74,6 +77,7 @@ public class ShowController {
         show.setId(id);
 
         showRepository.save(show);
+        redirectAttributes.addFlashAttribute("success", "Show modifié avec succès.");
         return "redirect:/shows/" + id;
     }
     // GET /shows/{id}/edit
@@ -91,6 +95,7 @@ public class ShowController {
         if (showRepository.existsById(id)) {
             showRepository.deleteById(id);
         }
+        redirectAttributes.addFlashAttribute("success", "Show supprimé.");
         return "redirect:/shows";
     }
 }

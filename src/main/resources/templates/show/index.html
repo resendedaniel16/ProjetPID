@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1 th:text="${title}">Shows</h1>
+<p th:if="${success}" th:text="${success}" style="color:green"></p>
 
 <p th:if="${#lists.isEmpty(shows)}">Aucun show pour le moment.</p>
 
