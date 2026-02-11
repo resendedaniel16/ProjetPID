@@ -86,4 +86,11 @@ public class ShowController {
         model.addAttribute("title", "Modifier un show");
         return "show/edit";
     }
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable Long id) {
+        if (showRepository.existsById(id)) {
+            showRepository.deleteById(id);
+        }
+        return "redirect:/shows";
+    }
 }

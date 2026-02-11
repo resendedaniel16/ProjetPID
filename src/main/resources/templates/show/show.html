@@ -18,6 +18,10 @@
     </small>
 </p>
 <p><a th:href="@{/shows/{id}/edit(id=${show.id})}">Modifier</a></p>
+<form th:action="@{/shows/{id}/delete(id=${show.id})}" method="post"
+      onsubmit="return confirm('Supprimer ce show ?');">
+    <button type="submit">Supprimer</button>
+</form>
 
 <p><a th:href="@{/shows}">Retour au catalogue</a></p>
 
