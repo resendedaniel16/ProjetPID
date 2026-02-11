@@ -17,6 +17,7 @@
         Créé le : <span th:text="${#temporals.format(show.createdAt, 'dd/MM/yyyy HH:mm')}">date</span>
     </small>
 </p>
+<p><a th:href="@{/shows/{id}/edit(id=${show.id})}">Modifier</a></p>
 
 <p><a th:href="@{/shows}">Retour au catalogue</a></p>
 

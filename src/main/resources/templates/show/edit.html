@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Modifier un show</title>
+</head>
+<body>
+
+<h1 th:text="${title}">Modifier un show</h1>
+
+<form th:action="@{/shows/{id}(id=${show.id})}" method="post" th:object="${show}">
+    <div>
+        <label for="title">Titre</label>
+        <input id="title" type="text" th:field="*{title}">
+        <div th:if="${#fields.hasErrors('title')}"
+             th:errors="*{title}"
+             style="color:red"></div>
+    </div>
+
+    <div>
+        <label for="description">Description</label>
+        <textarea id="description" th:field="*{description}"></textarea>
+        <div th:if="${#fields.hasErrors('description')}"
+             th:errors="*{description}"
+             style="color:red"></div>
+    </div>
+
+    <button type="submit">Enregistrer</button>
+</form>
+
+<p><a th:href="@{/shows/{id}(id=${show.id})}">Retour à la fiche</a></p>
+<p><a th:href="@{/shows}">Retour au catalogue</a></p>
+
+</body>
+</html>

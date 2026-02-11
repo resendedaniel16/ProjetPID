@@ -59,4 +59,14 @@ public class ShowController {
         showRepository.save(show);
         return "redirect:/shows";
     }
+    // GET /shows/{id}/edit
+    @GetMapping("/{id}/edit")
+    public String editForm(@PathVariable Long id, Model model) {
+        Show show = showRepository.findById(id).orElse(null);
+        if (show == null) return "redirect:/shows";
+
+        model.addAttribute("show", show);
+        model.addAttribute("title", "Modifier un show");
+        return "show/edit";
+    }
 }
