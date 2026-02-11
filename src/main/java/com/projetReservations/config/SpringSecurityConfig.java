@@ -37,9 +37,11 @@ public class SpringSecurityConfig {
                 .logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/").permitAll())
                 // CSRF activé par défaut (OK)
                 .httpBasic(Customizer.withDefaults());
+        http.exceptionHandling(ex -> ex.accessDeniedPage("/403"));
 
         return http.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
