@@ -28,13 +28,25 @@ public class ShowController {
     @GetMapping("/{id}")
     public String show(@PathVariable Long id, Model model) {
         Show show = showRepository.findById(id).orElse(null);
-
-        if (show == null) {
-            return "redirect:/shows";
-        }
+        if (show == null) return "redirect:/shows";
 
         model.addAttribute("show", show);
         model.addAttribute("title", show.getTitle());
         return "show/show";
+    }
+
+    // GET /shows/create
+    @GetMapping("/create")
+    public String createForm(Model model) {
+        model.addAttribute("show", new Show());
+        model.addAttribute("title", "Créer un show");
+        return "show/create";
+    }
+
+    // POST /shows
+    @PostMapping
+    public String store(@ModelAttribute Show show) {
+        showRepository.save(show);
+        return "redirect:/shows";
     }
 }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Créer un show</title>
+</head>
+<body>
+
+<h1 th:text="${title}">Créer un show</h1>
+<p><a th:href="@{/shows/create}">+ Créer un show</a></p>
+<form th:action="@{/shows}" method="post" th:object="${show}">
+    <div>
+        <label for="title">Titre</label>
+        <input id="title" type="text" th:field="*{title}" required>
+    </div>
+
+    <div>
+        <label for="description">Description</label>
+        <textarea id="description" th:field="*{description}"></textarea>
+    </div>
+
+    <button type="submit">Créer</button>
+</form>
+
+<p><a th:href="@{/shows}">Retour au catalogue</a></p>
+
+</body>
+</html>
