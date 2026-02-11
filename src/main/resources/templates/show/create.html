@@ -11,12 +11,18 @@
 <form th:action="@{/shows}" method="post" th:object="${show}">
     <div>
         <label for="title">Titre</label>
-        <input id="title" type="text" th:field="*{title}" required>
+        <input id="title" type="text" th:field="*{title}">
+        <div th:if="${#fields.hasErrors('title')}"
+             th:errors="*{title}"
+             style="color:red"></div>
     </div>
 
     <div>
         <label for="description">Description</label>
         <textarea id="description" th:field="*{description}"></textarea>
+        <div th:if="${#fields.hasErrors('description')}"
+             th:errors="*{description}"
+             style="color:red"></div>
     </div>
 
     <button type="submit">Créer</button>

@@ -5,6 +5,8 @@ import com.projetReservations.repository.ShowRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 @Controller
 @RequestMapping("/shows")
@@ -45,7 +47,15 @@ public class ShowController {
 
     // POST /shows
     @PostMapping
-    public String store(@ModelAttribute Show show) {
+    public String store(@Valid @ModelAttribute Show show,
+                        BindingResult bindingResult,
+                        Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("title", "Créer un show");
+            return "show/create";
+        }
+
         showRepository.save(show);
         return "redirect:/shows";
     }
