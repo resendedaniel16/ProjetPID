@@ -22,3 +22,8 @@ Projet Spring Boot réalisé dans le cadre du cours de Java / Spring.
 - Gestion des spectacles
 - Réservations
 - API REST (exemple sur Artist)
+## Comptes Tests
+-admin / mdp : @dmin
+-test / testos
+-daniel / projeticc
+
