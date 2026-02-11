@@ -59,6 +59,23 @@ public class ShowController {
         showRepository.save(show);
         return "redirect:/shows";
     }
+    @PostMapping("/{id}")
+    public String update(@PathVariable Long id,
+                         @Valid @ModelAttribute Show show,
+                         BindingResult bindingResult,
+                         Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("title", "Modifier un show");
+            return "show/edit";
+        }
+
+        // Sécurité : forcer l'id venant de l'URL
+        show.setId(id);
+
+        showRepository.save(show);
+        return "redirect:/shows/" + id;
+    }
     // GET /shows/{id}/edit
     @GetMapping("/{id}/edit")
     public String editForm(@PathVariable Long id, Model model) {
